@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './Login';
+import Search_School from './school/Search_School';
+import Edu_Dashboard from './assets/components/Educator/Edu_Dashboard';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Function to check if user is authenticated
+const isAuthenticated = () => {
+  const userType = localStorage.getItem('userType');
+  const userData = localStorage.getItem('userData');
+  return userType && userData;
+};
 
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  if (!isAuthenticated()) {
+    return <Navigate to="/" />;
+  }
+  return children;
+};
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Login />} />
+        <Route path="/search-school" element={<Search_School />} />
+        <Route path="/enroll/:schoolId" element={<div>Enrollment Page (Coming Soon)</div>} />
+        
+        {/* Protected Educator Routes */}
+        <Route path="/educator/dashboard" element={
+          <ProtectedRoute>
+            <Edu_Dashboard />
+          </ProtectedRoute>
+        } />
+        
+        {/* Catch all route - redirects to login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
