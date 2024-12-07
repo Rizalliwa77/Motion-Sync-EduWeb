@@ -1,29 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/Educator/Edu_Dashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Edu_Sidebar from './sidebar/Edu_Sidebar';
+import { db } from '../../../firebase/config';
+import { collection, query, getDocs } from 'firebase/firestore';
 
 const Edu_Dashboard = () => {
   const navigate = useNavigate();
+  const [educatorData, setEducatorData] = useState({
+    totalStudents: 0,
+    courses: [],
+    announcements: [],
+    notifications: []
+  });
 
-  // Sample data - replace with actual data from your backend
-  const educatorData = {
-    totalStudents: 45,
-    courses: [
-      { id: 1, name: 'Introduction to ASL 101', studentCount: 15 },
-      { id: 2, name: 'Basic Sign Language 101', studentCount: 12 },
-      { id: 3, name: 'Introduction to ASL 102', studentCount: 18 }
-    ],
-    announcements: [
-      { id: 1, date: '2024-03-15', message: 'New curriculum updates available for ASL courses' },
-      { id: 2, date: '2024-03-14', message: 'Upcoming teacher training session on March 20th' }
-    ],
-    notifications: [
-      { id: 1, type: 'assignment', message: 'New assignment submissions for ASL 101' },
-      { id: 2, type: 'message', message: 'Message from student John regarding homework' },
-      { id: 3, type: 'grade', message: 'Grades pending review for Basic Sign Language 101' }
-    ]
-  };
+  useEffect(() => {
+    const fetchEducatorData = async () => {
+      try {
+        // Get all courses from the specified school
+        const coursesQuery = query(
+          collection(db, 'schools/7kJvkewDYT1hTRKieGcQ/courses')
+        );
+        
+        const coursesSnapshot = await getDocs(coursesQuery);
+        const coursesData = [];
+        let totalStudents = 0;
+
+        // Process each course
+        for (const doc of coursesSnapshot.docs) {
+          const courseData = doc.data();
+          
+          // Get student count for this course
+          const studentsQuery = query(
+            collection(db, `schools/7kJvkewDYT1hTRKieGcQ/courses/${doc.id}/students`)
+          );
+          const studentsSnapshot = await getDocs(studentsQuery);
+          const studentCount = studentsSnapshot.size;
+          
+          totalStudents += studentCount;
+          
+          coursesData.push({
+            id: doc.id,
+            name: courseData.name,
+            studentCount: studentCount
+          });
+        }
+
+        setEducatorData(prev => ({
+          ...prev,
+          totalStudents,
+          courses: coursesData,
+          announcements: [
+            { id: 1, date: '2024-03-15', message: 'New curriculum updates available for ASL courses' },
+            { id: 2, date: '2024-03-14', message: 'Upcoming teacher training session on March 20th' }
+          ],
+          notifications: [
+            { id: 1, type: 'assignment', message: 'New assignment submissions for ASL 101' },
+            { id: 2, type: 'message', message: 'Message from student John regarding homework' },
+            { id: 3, type: 'grade', message: 'Grades pending review for Basic Sign Language 101' }
+          ]
+        }));
+      } catch (error) {
+        console.error('Error fetching educator data:', error);
+      }
+    };
+
+    fetchEducatorData();
+  }, []);
 
   return (
     <div className="dashboard-container">

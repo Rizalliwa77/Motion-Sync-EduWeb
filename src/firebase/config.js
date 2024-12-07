@@ -1,23 +1,17 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
 
+// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-auth-domain",
-  projectId: "your-project-id",
-  storageBucket: "your-storage-bucket",
-  messagingSenderId: "your-messaging-sender-id",
-  appId: "your-app-id"
+  apiKey: "AIzaSyBxGXe52PtB7YD9yGRjVoFNn3FVZLrNuqk",
+  authDomain: "motion-sync-edumode.firebaseapp.com",
+  projectId: "motion-sync-edumode",
+  storageBucket: "motion-sync-edumode.appspot.com",
+  messagingSenderId: "1071797681937",
+  appId: "1:1071797681937:web:f0fe655c3f0d40a0da2357",
+  measurementId: "G-J0JHEFC1K4"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase services
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-export { auth, db, storage }; 
+export const db = getFirestore(app); 

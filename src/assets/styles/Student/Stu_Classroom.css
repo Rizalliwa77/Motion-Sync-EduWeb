@@ -1,0 +1,261 @@
+.stu-classroom-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.classroom-content {
+  flex: 1;
+  padding: 2rem 3rem;
+  margin-left: 280px;
+  overflow-x: auto;
+  width: calc(100% - 280px);
+  min-width: 768px;
+}
+
+.course-info {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.course-title {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+}
+
+.course-stats {
+  display: flex;
+  gap: 1.5rem;
+  color: #666;
+}
+
+.course-description {
+  color: #666;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.course-instructor {
+  color: #555;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Video Grid */
+.video-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  padding: 20px;
+}
+
+.main-video,
+.secondary-video {
+  background: #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.video-placeholder .material-symbols-outlined {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.self-video {
+  background: #333;
+}
+
+/* Controls Bar */
+.controls-bar {
+  height: 80px;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.left-controls,
+.center-controls,
+.right-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: #444;
+}
+
+.control-btn.disabled {
+  background: #666;
+  color: #ccc;
+}
+
+.control-btn.active {
+  background: #00855D;
+}
+
+.end-call {
+  background: #dc3545;
+  padding: 0 20px;
+  border-radius: 22px;
+  width: auto;
+}
+
+.end-call:hover {
+  background: #c82333;
+}
+
+/* Chat Sidebar */
+.chat-sidebar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 80px;
+  width: 300px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #eee;
+}
+
+.chat-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.chat-input {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.chat-input button {
+  background: #00855D;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input button:hover {
+  background: #006f4d;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-video {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controls-bar {
+    padding: 0 20px;
+  }
+
+  .chat-sidebar {
+    width: 100%;
+    z-index: 100;
+  }
+}
+
+/* Add course selection styling */
+.course-selection {
+  margin-bottom: 1rem;
+}
+
+.course-selection label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.course-selection select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+

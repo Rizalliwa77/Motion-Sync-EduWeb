@@ -1,0 +1,193 @@
+.edu-stulist-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 3rem 4rem;
+  margin-left: 240px;
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.search-bar input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  font-size: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filters select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  margin-bottom: 3rem;
+}
+
+.table-container:last-child {
+  margin-bottom: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid #eee;
+}
+
+th:hover {
+  background-color: #f5f5f5;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: #E3FCF7;
+  color: #55C2A3;
+}
+
+.status-badge.inactive {
+  background-color: #FFE5E5;
+  color: #FF4D4D;
+}
+
+.progress-column {
+  min-width: 200px;
+  position: relative;
+}
+
+.progress-bar {
+  width: 120px;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  margin-right: 45px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #55C2A3;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-bar span {
+  position: absolute;
+  right: -45px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn {
+  background-color: #55C2A3;
+  color: white;
+}
+
+.message-btn {
+  background-color: #0052CC;
+  color: white;
+}
+
+.view-btn:hover, .message-btn:hover {
+  opacity: 0.9;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  padding: 1.25rem 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th:nth-child(1), td:nth-child(1) { width: 15%; }
+th:nth-child(2), td:nth-child(2) { width: 20%; }
+th:nth-child(3), td:nth-child(3) { width: 15%; }
+th:nth-child(4), td:nth-child(4) { width: 10%; }
+th:nth-child(5), td:nth-child(5) { width: 15%; }
+th:nth-child(6), td:nth-child(6) { width: 12%; }
+th:nth-child(7), td:nth-child(7) { width: 13%; }
+
+.date-column {
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem 1rem 3rem;
+    margin-left: 0;
+  }
+  
+  .table-container {
+    margin-bottom: 2rem;
+  }
+}

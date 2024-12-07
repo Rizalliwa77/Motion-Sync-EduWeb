@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "./Edu_Sidebar.css";
+import "./Stu_Sidebar.css";
 
-const Edu_Sidebar = () => {
+const Stu_Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('userType');
@@ -29,32 +37,20 @@ const Edu_Sidebar = () => {
 
       {/* Menu Items */}
       <ul className="sidebar-menu">
-        <Link to="/educator/dashboard">
-          <li className={isActive("/educator/dashboard") ? "active" : ""}>
+        <Link to="/student/dashboard">
+          <li className={isActive("/student/dashboard") ? "active" : ""}>
             <span className="material-symbols-outlined">dashboard</span>
             Dashboard
           </li>
         </Link>
-        <Link to="/educator/students">
-          <li className={isActive("/educator/students") ? "active" : ""}>
-            <span className="material-symbols-outlined">group</span>
-            Students
-          </li>
-        </Link>
-        <Link to="/educator/courses">
-          <li className={isActive("/educator/courses") ? "active" : ""}>
-            <span className="material-symbols-outlined">book</span>
-            Content
-          </li>
-        </Link>
-        <Link to="/educator/classroom">
-          <li className={isActive("/educator/classroom") ? "active" : ""}>
+        <Link to="/student/classroom">
+          <li className={isActive("/student/classroom") ? "active" : ""}>
             <span className="material-symbols-outlined">school</span>
             Classroom
           </li>
         </Link>
-        <Link to="/educator/messages">
-          <li className={isActive("/educator/messages") ? "active" : ""}>
+        <Link to="/student/messages">
+          <li className={isActive("/student/messages") ? "active" : ""}>
             <span className="material-symbols-outlined">mail</span>
             Messages
           </li>
@@ -66,19 +62,19 @@ const Edu_Sidebar = () => {
 
       {/* Profile and Settings */}
       <ul className="sidebar-menu">
-        <Link to="/educator/profile">
-          <li className={isActive("/educator/profile") ? "active" : ""}>
+        <Link to="/student/profile">
+          <li className={isActive("/student/profile") ? "active" : ""}>
             <span className="material-symbols-outlined">person</span>
             Profile
           </li>
         </Link>
-        <Link to="/educator/settings">
-          <li className={isActive("/educator/settings") ? "active" : ""}>
+        <Link to="/student/settings">
+          <li className={isActive("/student/settings") ? "active" : ""}>
             <span className="material-symbols-outlined">settings</span>
             Settings
           </li>
         </Link>
-        <li onClick={handleLogout}>
+        <li onClick={handleLogout} className="logout-item">
           <span className="material-symbols-outlined">logout</span>
           Log out
         </li>
@@ -90,12 +86,12 @@ const Edu_Sidebar = () => {
           <span className="material-symbols-outlined">account_circle</span>
         </div>
         <div className="user-info">
-          <p>Teacher</p>
-          <span>Educator</span>
+          <p>{userData?.name || 'Student'}</p>
+          <span>Learner</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default Edu_Sidebar;
+export default Stu_Sidebar;

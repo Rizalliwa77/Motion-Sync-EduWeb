@@ -59,7 +59,20 @@ const Login = () => {
       return;
     }
 
-    // If not the predefined educator, show error
+    // Check for predefined student credentials
+    if (username === 'stu' && password === '123') {
+      // Student login successful
+      const studentData = {
+        username: 'stu',
+        role: 'student'
+      };
+      localStorage.setItem('userType', 'student');
+      localStorage.setItem('userData', JSON.stringify(studentData));
+      navigate('/student/dashboard');
+      return;
+    }
+
+    // If neither educator nor student credentials match, show error
     setError('Invalid username or password');
   };
 
